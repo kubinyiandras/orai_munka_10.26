@@ -171,7 +171,14 @@
             // 
             // openFileDialog1
             // 
+            this.openFileDialog1.DefaultExt = "txt";
             this.openFileDialog1.FileName = "openFileDialog1";
+            this.openFileDialog1.Filter = "Szöveges dokumentum|*.txt";
+            // 
+            // saveFileDialog1
+            // 
+            this.saveFileDialog1.DefaultExt = "txt";
+            this.saveFileDialog1.Filter = "Szöveges dokumentum|*.txt";
             // 
             // AgeBox
             // 

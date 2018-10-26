@@ -29,7 +29,7 @@ namespace RegisztracioAlkalmazas
             };
             OpenButton.Click += (sender, e) =>
             {
-                Megnyitas();
+                Betoltes();
             };
             NewHobbyButton.Click += (sender, e) =>
             {
@@ -58,7 +58,7 @@ namespace RegisztracioAlkalmazas
 
 
 
-            string tmp = String.Format("Név: {0};Szül.dátum: {1};Nem: {2};Kedvenc Hobbi: {3}, Összes Hobbi: {4}", nev, ev, nem, kedvenclista,osszeslista);
+            string tmp = String.Format("{0};{1};{2};{3};{4}", nev, ev, nem, kedvenclista,osszeslista);
             return tmp;
         }
         private void Mentes()
@@ -93,6 +93,37 @@ namespace RegisztracioAlkalmazas
         private void SexText_Click(object sender, EventArgs e)
         {
 
+        }
+        private void Betoltes()
+        {
+            if (openFileDialog1.ShowDialog(this) == DialogResult.OK)
+            {
+                string tartalom = File.ReadAllText(openFileDialog1.FileName);
+                string[] reszek = tartalom.Split(';');
+                string nev = reszek[0];
+                NameBox.Text = nev;
+                string ev = reszek[1];
+                AgeBox.Text = ev;
+
+                if (reszek[2] == "Nő")
+                {
+                    FemaleRadioButton.PerformClick();
+                }
+                else if (reszek[2] == "férfi")
+                {
+                    MaleRadioButton.PerformClick();
+                }
+                string lista = reszek[3];
+
+
+                string[] kedvenc = reszek[4].Split(',');
+                for (int i = 0; i < kedvenc.Length; i++)
+                {
+                    FavHobbyListBox.Items.Add(kedvenc[i]);
+
+                }
+                FavHobbyListBox.SelectedItem = lista;
+            }
         }
     }
 }
